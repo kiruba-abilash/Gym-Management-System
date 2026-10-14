@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trainers - Gym Management System</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .back-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+
+        .edit-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 230px;
+    height: 100vh;
+    background: #111827;
+    padding-top: 25px;
+}
+
+.sidebar h2 {
+    color: white;
+    text-align: center;
+    margin: 0 0 30px;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.sidebar a {
+    display: block;
+    color: #d1d5db;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-size: 16px;
+}
+
+.sidebar a:hover {
+    background: #1f2937;
+    color: white;
+}
+
+.sidebar a.active {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+body {
+    padding: 0;
+}
+
+.container {
+    max-width: none;
+    margin-left: 230px;
+    padding: 35px;
+    border-radius: 0;
+    min-height: 100vh;
+}
+body {
+    background:
+        linear-gradient(
+            rgba(241, 245, 249, 0.78),
+            rgba(241, 245, 249, 0.78)
+        ),
+        url("images/dashboard-bg.jpg")
+        center center / cover fixed no-repeat;
+}
+
+.container {
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.78),
+            rgba(255, 255, 255, 0.78)
+        ),
+        url("images/dashboard-bg.jpg")
+        center center / cover fixed no-repeat;
+
+    min-height: 100vh;
+}
+
+form {
+    background: rgba(255, 255, 255, 0.88);
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+table {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+}
+
+input,
+select {
+    background: rgba(255, 255, 255, 0.96);
+}
+
+button {
+    border: none;
+    border-radius: 6px;
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+form button {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+table td button:first-child {
+    background: #2563eb;
+    color: white;
+}
+
+table td button:last-child {
+    background: #dc2626;
+    color: white;
+}
+header {
+    margin-left: 230px;
+    background: #222;
+    color: white;
+    padding: 20px 35px;
+    text-align: center;
+}
+
+    </style>
+
+   <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="sidebar">
+    <h2>🏋️ GYM SYSTEM</h2>
+
+    <a href="/dashboard.html">🏠 Dashboard</a>
+    <a href="/members.html">👥 Members</a>
+    <a href="/trainers.html" class="active" >🏋️ Trainers</a>
+    <a href="/packages.html">📦 Packages</a>
+    <a href="/memberships.html">🎫 Memberships</a>
+    <a href="/attendance.html">✅ Attendance</a>
+    <a href="/payments.html">💳 Payments</a>
+    <a href="/reports.html">📊 Reports</a>
+</div>
+<header>
+    <h1>Gym Management System</h1>
+    <p>Trainers Management</p>
+   <button
+    class="logout-btn"
+    onclick="fetch('/api/logout', { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = '/login.html';
+            } else {
+                alert('Logout failed');
+            }
+        })
+        .catch(() => alert('Server error'))"
+>
+    Logout
+</button>
+</header>
+
+    <div class="container">
+
+        <h2>Add New Trainer</h2>
+
+        <form id="trainerForm">
+
+            <input
+    type="text"
+    id="name"
+    placeholder="Trainer Name"
+    pattern="[A-Za-z ]{3,}"
+    title="Name must contain only letters and at least 3 characters"
+    required
+>
+            <input
+    type="tel"
+    id="phone"
+    placeholder="Phone Number"
+    pattern="[0-9]{10}"
+    maxlength="10"
+    required
+>
+
+            <select id="specialization">
+    <option value="">Select Specialization</option>
+    <option value="Personal Trainer">Personal Trainer</option>
+    <option value="Fitness Trainer">Fitness Trainer</option>
+    <option value="Strength & Conditioning">Strength & Conditioning</option>
+    <option value="Cardio Trainer">Cardio Trainer</option>
+    <option value="Bodybuilding Trainer">Bodybuilding Trainer</option>
+    <option value="CrossFit Trainer">CrossFit Trainer</option>
+    <option value="Yoga Trainer">Yoga Trainer</option>
+</select>
+
+            <input
+    type="number"
+    id="salary"
+    placeholder="Salary"
+    min="0"
+    step="0.01"
+    required
+>
+
+            <button type="submit" class="add-btn">
+                Add Trainer
+            </button>
+
+        </form>
+
+        <h2>Trainer List</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Specialization</th>
+                    <th>Salary</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="trainerTableBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script>
+
+        async function checkLogin() {
+    const response = await fetch("/api/session");
+
+    if (!response.ok) {
+        window.location.href = "/login.html";
+        return false;
+    }
+
+    return true;
+}
+
+        async function loadTrainers() {
+
+            try {
+
+                const response = await fetch("/api/trainers");
+
+                const trainers = await response.json();
+
+                const tableBody =
+                    document.getElementById("trainerTableBody");
+
+                tableBody.innerHTML = "";
+
+                trainers.forEach(trainer => {
+
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                        <td>${trainer.id}</td>
+                        <td>${trainer.name}</td>
+                        <td>${trainer.phone || ""}</td>
+                        <td>${trainer.specialization || ""}</td>
+                        <td>${trainer.salary || ""}</td>
+
+                        <td>
+                            <button
+                                class="edit-btn"
+                                onclick="editTrainer(${trainer.id})">
+                                Edit
+                            </button>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteTrainer(${trainer.id})">
+                                Delete
+                            </button>
+                        </td>
+                    `;
+
+                    tableBody.appendChild(row);
+
+                });
+
+            } catch (error) {
+
+                console.error(error);
+
+            }
+
+        }
+
+        document.getElementById("trainerForm").addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+    const phone = document.getElementById("phone").value.trim();
+
+const phonePattern = /^[0-9]{10}$/;
+
+if (!phonePattern.test(phone)) {
+    alert("Phone number must contain exactly 10 digits.");
+    return;
+}
+
+    const name = document.getElementById("name").value;
+    const specialization = document.getElementById("specialization").value;
+    const salary = document.getElementById("salary").value;
+
+    try {
+
+        const response = await fetch("/api/trainers", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name,
+                phone,
+                specialization,
+                salary
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            alert(data.message);
+
+            document.getElementById("trainerForm").reset();
+
+            loadTrainers();
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Server error");
+
+    }
+
+});
+
+        checkLogin().then(() => {
+    loadTrainers();
+});
+
+        async function deleteTrainer(id) {
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this trainer?"
+    );
+
+    if (!confirmDelete) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(`/api/trainers/${id}`, {
+            method: "DELETE"
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            alert(data.message);
+
+            loadTrainers();
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Server error");
+
+    }
+}
+
+async function editTrainer(id) {
+
+    const name = prompt("Enter trainer name:");
+
+    if (!name) {
+        return;
+    }
+
+    const phone = prompt("Enter phone number:");
+    const specialization = prompt("Enter specialization:");
+    const salary = prompt("Enter salary:");
+
+    try {
+
+        const response = await fetch(`/api/trainers/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name,
+                phone,
+                specialization,
+                salary
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            alert(data.message);
+            checkLogin().then(() => {
+    loadTrainers();
+});
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Server error");
+
+    }
+}
+
+    </script>
+
+</body>
+
+</html>

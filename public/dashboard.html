@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gym Management System - Dashboard</title>
+
+    <style>
+        * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f6f8;
+    color: #1f2937;
+}
+
+/* Sidebar */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 230px;
+    height: 100vh;
+    background: #111827;
+    padding-top: 25px;
+}
+
+.sidebar h2 {
+    color: white;
+    text-align: center;
+    margin: 0 0 30px;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.sidebar a {
+    display: block;
+    color: #d1d5db;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: #1f2937;
+    color: white;
+    padding-left: 30px;
+}
+
+.sidebar a.active {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+/* Header */
+
+header {
+    margin-left: 230px;
+    background: white;
+    color: #111827;
+    padding: 22px 35px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    position: relative;
+}
+
+header h1 {
+    margin: 0 0 7px;
+    font-size: 28px;
+}
+
+header p {
+    margin: 0;
+    color: #6b7280;
+}
+
+header button {
+    position: absolute;
+    right: 35px;
+    top: 30px;
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+header button:hover {
+    background: #b91c1c;
+}
+
+/* Main content */
+
+.container {
+    margin-left: 230px;
+    padding: 35px;
+}
+
+.container > h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+/* Dashboard Cards */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 22px;
+}
+
+.card {
+    display: block;
+    background: white;
+    color: #1f2937;
+    text-decoration: none;
+    padding: 30px 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    cursor: pointer;
+    border-left: 5px solid #2563eb;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+    margin: 0 0 15px;
+    font-size: 18px;
+    color: #6b7280;
+}
+
+.number {
+    font-size: 36px;
+    font-weight: bold;
+    color: #111827;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        width: 180px;
+    }
+
+    header,
+    .container {
+        margin-left: 180px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+/* Professional Gym Dashboard Background */
+
+body {
+    background:
+        linear-gradient(
+            rgba(243, 244, 246, 0.94),
+            rgba(243, 244, 246, 0.94)
+        );
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Floating gym decorations */
+
+body::before {
+    content: "🏋️";
+    position: fixed;
+    right: 45px;
+    top: 120px;
+    font-size: 95px;
+    opacity: 0.08;
+    transform: rotate(-15deg);
+    pointer-events: none;
+}
+
+body::after {
+    content: "💪";
+    position: fixed;
+    right: 80px;
+    bottom: 40px;
+    font-size: 110px;
+    opacity: 0.07;
+    transform: rotate(12deg);
+    pointer-events: none;
+}
+
+/* Professional dashboard cards */
+
+.card {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 38px rgba(37, 99, 235, 0.15);
+}
+
+/* Decorative circle inside cards */
+
+.card::after {
+    content: "";
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.07);
+    right: -25px;
+    top: -25px;
+}
+
+/* Header professional look */
+
+header {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Sidebar premium effect */
+
+.sidebar {
+    background:
+        linear-gradient(
+            180deg,
+            #0f172a,
+            #111827
+        );
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15);
+}
+/* Dashboard Card Icons */
+
+.cards .card::before {
+    position: absolute;
+    right: 22px;
+    bottom: 18px;
+    font-size: 42px;
+    opacity: 0.18;
+    transition: 0.3s;
+}
+
+.cards .card:hover::before {
+    transform: scale(1.15) rotate(-6deg);
+    opacity: 0.28;
+}
+
+/* Members */
+.cards .card:nth-child(1)::before {
+    content: "👥";
+}
+
+/* Trainers */
+.cards .card:nth-child(2)::before {
+    content: "🏋️";
+}
+
+/* Packages */
+.cards .card:nth-child(3)::before {
+    content: "📦";
+}
+
+/* Memberships */
+.cards .card:nth-child(4)::before {
+    content: "🎫";
+}
+
+/* Attendance */
+.cards .card:nth-child(5)::before {
+    content: "✅";
+}
+
+/* Payments */
+.cards .card:nth-child(6)::before {
+    content: "💳";
+}
+/* Gym Background + Glass Effect */
+
+body {
+    background:
+        linear-gradient(
+            rgba(241, 245, 249, 0.65),
+            rgba(241, 245, 249, 0.65)
+        ),
+        url("images/dashboard-bg.jpg")
+        center center / cover fixed no-repeat;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+header {
+    background: rgba(255, 255, 255, 0.90);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.container {
+    background:
+        linear-gradient(
+            rgba(241, 245, 249, 0.70),
+            rgba(241, 245, 249, 0.70)
+        ),
+        url("images/dashboard-bg.jpg")
+        center center / cover no-repeat;
+
+    min-height: calc(100vh - 116px);
+}
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header>
+    <h1>Gym Management System</h1>
+    <p>Welcome, <span id="username">Admin</span></p>
+
+    <button class="logout-btn" onclick="logout()">
+        Logout
+    </button>
+</header>
+
+    <div class="sidebar">
+    <h2>🏋️ GYM SYSTEM</h2>
+
+    <a href="/dashboard.html" class="active">🏠 Dashboard</a>
+    <a href="/members.html">👥 Members</a>
+    <a href="/trainers.html">🏋️ Trainers</a>
+    <a href="/packages.html">📦 Packages</a>
+    <a href="/memberships.html">🎫 Memberships</a>
+    <a href="/attendance.html">✅ Attendance</a>
+    <a href="/payments.html">💳 Payments</a>
+    <a href="/reports.html">📊 Reports</a>
+</div>
+
+    <div class="container">
+
+        <h2>Dashboard Overview</h2>
+
+        <div class="cards">
+
+            <a href="/members.html" class="card">
+    <h2>Members</h2>
+    <div class="number" id="totalMembers">0</div>
+</a>
+
+            <a href="/trainers.html" class="card">
+    <h2>Trainers</h2>
+    <div class="number" id="totalTrainers">0</div>
+</a>
+            <a href="/packages.html" class="card">
+    <h2>Packages</h2>
+    <div class="number" id="totalPackages">0</div>
+</a>
+
+            <a href="/memberships.html" class="card">
+    <h2>Memberships</h2>
+    <div class="number" id="totalMemberships">0</div>
+</a>
+
+            <a href="/attendance.html" class="card">
+    <h2>Attendance</h2>
+    <div class="number" id="totalAttendance">0</div>
+</a>
+
+            <a href="/payments.html" class="card">
+    <h2>Payments</h2>
+    <div class="number" id="totalPayments">0</div>
+</a>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        async function loadDashboard() {
+
+            try {
+
+                const response = await fetch("/api/dashboard");
+
+                const data = await response.json();
+
+                document.getElementById("totalMembers").textContent =
+                    data.totalMembers;
+
+                document.getElementById("totalTrainers").textContent =
+                    data.totalTrainers;
+
+                document.getElementById("totalPackages").textContent =
+                    data.totalPackages;
+
+                document.getElementById("totalMemberships").textContent =
+                    data.totalMemberships;
+
+                document.getElementById("totalAttendance").textContent =
+                    data.totalAttendance;
+
+                document.getElementById("totalPayments").textContent =
+                    data.totalPayments;
+
+            } catch (error) {
+
+                console.error("Dashboard error:", error);
+
+            }
+
+        }
+
+        async function logout() {
+    try {
+        const response = await fetch("/api/logout", {
+            method: "POST"
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            window.location.href = "/login.html";
+        } else {
+            alert(data.message);
+        }
+
+    } catch (error) {
+        console.error("Logout error:", error);
+        alert("Logout failed");
+    }
+}
+
+async function checkLogin() {
+    try {
+        const response = await fetch("/api/session");
+
+        if (!response.ok) {
+            window.location.href = "/login.html";
+            return;
+        }
+
+        const data = await response.json();
+document.getElementById("username").textContent = data.user.username;
+
+    } catch (error) {
+        console.error("Session check error:", error);
+        window.location.href = "/login.html";
+    }
+}
+
+        checkLogin();
+        loadDashboard();
+
+        async function logout() {
+    await fetch("/api/logout", {
+        method: "POST"
+    });
+
+    window.location.href = "/login.html";
+}
+
+    </script>
+
+</body>
+</html>

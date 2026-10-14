@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Packages - Gym Management System</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .back-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+
+        .edit-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 230px;
+    height: 100vh;
+    background: #111827;
+    padding-top: 25px;
+}
+
+.sidebar h2 {
+    color: white;
+    text-align: center;
+    margin: 0 0 30px;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.sidebar a {
+    display: block;
+    color: #d1d5db;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-size: 16px;
+}
+
+.sidebar a:hover {
+    background: #1f2937;
+    color: white;
+}
+
+.sidebar a.active {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+body {
+    padding: 0;
+}
+
+.container {
+    max-width: none;
+    margin-left: 230px;
+    padding: 35px;
+    border-radius: 0;
+    min-height: 100vh;
+}
+body {
+    background:
+        linear-gradient(
+            rgba(241, 245, 249, 0.78),
+            rgba(241, 245, 249, 0.78)
+        ),
+        url("images/dashboard-bg.jpg")
+        center center / cover fixed no-repeat;
+}
+
+.container {
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.78),
+            rgba(255, 255, 255, 0.78)
+        ),
+        url("images/dashboard-bg.jpg")
+        center center / cover fixed no-repeat;
+
+    min-height: 100vh;
+}
+
+form {
+    background: rgba(255, 255, 255, 0.88);
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+table {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+}
+
+input,
+select {
+    background: rgba(255, 255, 255, 0.96);
+}
+
+button {
+    border: none;
+    border-radius: 6px;
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+form button {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+table td button:first-child {
+    background: #2563eb;
+    color: white;
+}
+
+table td button:last-child {
+    background: #dc2626;
+    color: white;
+}
+header {
+    margin-left: 230px;
+    background: #222;
+    color: white;
+    padding: 20px 35px;
+    text-align: center;
+}
+
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="sidebar">
+    <h2>🏋️ GYM SYSTEM</h2>
+
+    <a href="/dashboard.html">🏠 Dashboard</a>
+    <a href="/members.html">👥 Members</a>
+    <a href="/trainers.html">🏋️ Trainers</a>
+    <a href="/packages.html" class="active">📦 Packages</a>
+    <a href="/memberships.html">🎫 Memberships</a>
+    <a href="/attendance.html">✅ Attendance</a>
+    <a href="/payments.html">💳 Payments</a>
+    <a href="/reports.html">📊 Reports</a>
+</div>
+<header>
+    <h1>Gym Management System</h1>
+    <p>Packages Management</p>
+   <button
+    class="logout-btn"
+    onclick="fetch('/api/logout', { method: 'POST' })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = '/login.html';
+            } else {
+                alert('Logout failed');
+            }
+        })
+        .catch(() => alert('Server error'))"
+>
+    Logout
+</button>
+</header>
+    <div class="container">
+        
+        <h2>Add New Package</h2>
+
+        <form id="packageForm">
+
+            <select id="package_name" required>
+    <option value="">Select Package</option>
+    <option value="Monthly Package">Monthly Package</option>
+    <option value="3 Months Package">3 Months Package</option>
+    <option value="6 Months Package">6 Months Package</option>
+    <option value="Annual Package">Annual Package</option>
+</select>
+
+            <input
+    type="number"
+    id="duration"
+    placeholder="Duration (Days)"
+    min="1"
+    required
+>
+
+            <input
+    type="number"
+    id="price"
+    placeholder="Price"
+    min="1"
+    step="0.01"
+    required
+>
+
+            <button type="submit" class="add-btn">
+                Add Package
+            </button>
+
+        </form>
+
+        <h2>Package List</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Package Name</th>
+                    <th>Duration</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="packageTableBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script>
+
+        async function checkLogin() {
+    const response = await fetch("/api/session");
+
+    if (!response.ok) {
+        window.location.href = "/login.html";
+        return false;
+    }
+
+    return true;
+}
+
+        async function loadPackages() {
+
+            try {
+
+                const response = await fetch("/api/packages");
+
+                const packages = await response.json();
+
+                const tableBody =
+                    document.getElementById("packageTableBody");
+
+                tableBody.innerHTML = "";
+
+                packages.forEach(pkg => {
+
+                    const row = document.createElement("tr");
+
+                    row.innerHTML = `
+                        <td>${pkg.id}</td>
+                        <td>${pkg.package_name}</td>
+                        <td>${pkg.duration}</td>
+                        <td>${pkg.price}</td>
+
+                        <td>
+                            <button
+                                class="edit-btn"
+                                onclick="editPackage(${pkg.id})">
+                                Edit
+                            </button>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deletePackage(${pkg.id})">
+                                Delete
+                            </button>
+                        </td>
+                    `;
+
+                    tableBody.appendChild(row);
+
+                });
+
+            } catch (error) {
+
+                console.error(error);
+
+            }
+
+        }
+
+        document.getElementById("packageForm").addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+    const package_name =
+        document.getElementById("package_name").value;
+
+    const duration =
+        document.getElementById("duration").value;
+
+    const price =
+        document.getElementById("price").value;
+
+    try {
+
+        const response = await fetch("/api/packages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                package_name,
+                duration,
+                price
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            alert(data.message);
+
+            document.getElementById("packageForm").reset();
+
+            checkLogin().then(() => {
+    loadPackages();
+});
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Server error");
+
+    }
+
+});
+
+        checkLogin().then(() => {
+    loadPackages();
+});
+
+        async function deletePackage(id) {
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this package?"
+    );
+
+    if (!confirmDelete) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(`/api/packages/${id}`, {
+            method: "DELETE"
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            alert(data.message);
+
+            loadPackages();
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Server error");
+
+    }
+}
+
+async function editPackage(id) {
+
+    const package_name = prompt("Enter package name:");
+
+    if (!package_name) {
+        return;
+    }
+
+    const duration = prompt("Enter duration:");
+    const price = prompt("Enter price:");
+
+    try {
+
+        const response = await fetch(`/api/packages/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                package_name,
+                duration,
+                price
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+
+            alert(data.message);
+            loadPackages();
+
+        } else {
+
+            alert(data.message);
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Server error");
+
+    }
+}
+
+    </script>
+
+</body>
+
+</html>
